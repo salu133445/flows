@@ -13,7 +13,7 @@ body {
   font-size: 24px;
 }
 
-.remark-slide-content h2, h3, h4, h5, h6, p, ul, ol, .MathJax_Display {
+.remark-slide-content h2, h3, h4, h5, h6, p, ul, ol {
   margin: 1ex 0;
 }
 

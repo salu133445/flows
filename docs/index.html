@@ -5,19 +5,10 @@
   <title>Flow-based Deep Generative Models</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
-  <script type="text/javascript" src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-  <script type="text/javascript">
-    MathJax = {
-      tex: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"],["\\[", "\\]"]],
-      }
-    };
-  </script>
-  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 
 <body>
+  <script type="text/javascript" src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
   <script type="text/javascript">
     var slideshow = remark.create({
       sourceUrl: "source.md",
@@ -26,6 +17,18 @@
       countIncrementalSlides: false,
     });
   </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        skipTags: ["script", "noscript", "style", "textarea", "pre"],
+        processEscapes: true,
+      },
+      "HTML-CSS": { styles: { ".MathJax_Display": { margin: "1ex 0" } } }
+    });
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
 </body>
 
 </html>
