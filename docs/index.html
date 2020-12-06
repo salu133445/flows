@@ -6,17 +6,15 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
+  <script type="text/javascript">
+    MathJax = {
+      tex: {
         inlineMath: [["$", "$"], ["\\(", "\\)"]],
         displayMath: [["$$", "$$"],["\\[", "\\]"]],
-        skipTags: ["script", "noscript", "style", "textarea", "pre"],
-        processEscapes: true,
       }
-    });
+    };
   </script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 
 <body>
