@@ -16,8 +16,8 @@ Jiarui Xu and Hao-Wen Dong
   - Change of variable theorem
 - __Normalizing Flows__
 - __Models__
-  - RealNVP
   - NICE
+  - RealNVP
   - Glow
 
 ---
@@ -239,7 +239,7 @@ The core idea behind RealNVP (Real-valued Non-Volume Preserving) is to
 
 # RealNVP
 
-.footer[Laurent Dinh, Jascha Sohl-Dickstein and Samy Bengio, "Density Estimation using Real NVP," _ICLR_, 2017.]
+.footer[Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio, "Density Estimation using Real NVP," _ICLR_, 2017.]
 
 The transformation
 
@@ -261,7 +261,7 @@ The transformation
 
 # RealNVP
 
-.footer[Laurent Dinh, Jascha Sohl-Dickstein and Samy Bengio, "Density Estimation using Real NVP," _ICLR_, 2017.]
+.footer[Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio, "Density Estimation using Real NVP," _ICLR_, 2017.]
 
 The transformation
 
@@ -280,10 +280,39 @@ The transformation
 
 ---
 
+# RealNVP - Experiments on toy data
+
+__Settings__: 2D data, 5 affine coupling layers
+
+.center[![realnvp-toy](images/realnvp-toy.png)]
+
+---
+
+# RealNVP - Experiments on toy data
+
+__Settings__: 2D data, 5 affine coupling layers
+
+.center[![realnvp-toy](images/realnvp-toy-2.png)]
+
+---
+
+# RealNVP - Experiments on MNIST
+
+__Settings__: 764 dimensions (28$\times$28), 5 affine coupling layers
+
+.center[![realnvp-toy](images/realnvp-mnist.png)]
+
+---
+
 # RealNVP
 
-- We can parameterize $s$ and $t$ with complex models (e.g., deep neural networks) as we don't need to the inverse functions and the Jacobian of $s$ and $t$.
-- Some dimensions remain unchanged in an affine coupling layer. Thus, we need to alternate the dimensions being modified.
+- Inverse functions and the Jacobians of $s$ and $t$ are not required
+
+  $\to$ $s$ and $t$ can be rather complex models (e.g., deep neural networks)
+
+- Some dimensions remain unchanged after the transform
+
+  $\to$ alternate the dimensions being modified
 
 ---
 
@@ -304,3 +333,7 @@ class: center, middle
 class: center, middle
 
 # Thank you!
+
+[Code] <https://github.com/salu133445/flows>
+
+[Slides] <https://salu133445.github.io/flows>

@@ -26,7 +26,7 @@ body {
 }
 
 .remark-slide-content .footer a {
-  color: #888;
+  color: #999;
 }
 
 .remark-slide-content .normal {
@@ -39,6 +39,10 @@ body {
 
 .remark-slide-content .large {
   font-size: 28px;
+}
+
+.remark-slide-content a {
+  color: #000;
 }
 
 .remark-slide-content h1 {
