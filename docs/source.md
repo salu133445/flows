@@ -173,7 +173,7 @@ The core idea behind NICE (Non-linear Independent Components Estimation) is to
 
 ---
 
-# NICE
+# NICE - Additive coupling layers
 
 .footer[Laurent Dinh, David Krueger, and Yoshua Bengio, "NICE: Non-linear Independent Components Estimation," _ICLR_, 2015.]
 
@@ -193,7 +193,7 @@ The transformation
 
 ---
 
-# NICE
+# NICE - Additive coupling layers
 
 .footer[Laurent Dinh, David Krueger, and Yoshua Bengio, "NICE: Non-linear Independent Components Estimation," _ICLR_, 2015.]
 
@@ -209,6 +209,17 @@ The transformation
   `$$\mathbf{J} = \begin{bmatrix}\mathbf{I}_d&\mathbf{0}_{d\times(D-d)}\\\frac{\partial m(\mathbf{x}_1)}{\partial\mathbf{x}_1}&\mathbf{I}_{D-d}\end{bmatrix}$$`
 
   `$$\det(\mathbf{J}) = \mathbf{I}$$`
+
+---
+
+# NICE - Alternating pattern
+
+Some dimensions remain unchanged after the transform
+
+- alternate the dimensions being modified
+- 3 coupling layers are necessary to allow all dimensions to influence one another
+
+.center[![alternating-pattern](images/alternating-pattern.png)]
 
 ---
 
@@ -237,7 +248,7 @@ The core idea behind RealNVP (Real-valued Non-Volume Preserving) is to
 
 ---
 
-# RealNVP
+# RealNVP - Affine coupling layers
 
 .footer[Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio, "Density Estimation using Real NVP," _ICLR_, 2017.]
 
@@ -259,7 +270,7 @@ The transformation
 
 ---
 
-# RealNVP
+# RealNVP - Affine coupling layers
 
 .footer[Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio, "Density Estimation using Real NVP," _ICLR_, 2017.]
 
@@ -304,19 +315,37 @@ __Settings__: 764 dimensions (28$\times$28), 5 affine coupling layers
 
 ---
 
-# RealNVP
+# GLOW
 
-- Inverse functions and the Jacobians of $s$ and $t$ are not required
+.footer[Diederik P. Kingma and Prafulla Dhariwal, "Glow: Generative Flow with Invertible 1$\times$1 Convolutions," _NeurIPS_, 2018]
 
-  $\to$ $s$ and $t$ can be rather complex models (e.g., deep neural networks)
+.absolute-right[![glow](images/glow.png)]
 
-- Some dimensions remain unchanged after the transform
+- Actnorm:
 
-  $\to$ alternate the dimensions being modified
+  - Forward: $\mathbf{y} = \mathbf{s} \odot \mathbf{x} + \mathbf{b}$
+  - Backward: $\mathbf{x} = \mathbf{s} \odot (\mathbf{y} - \mathbf{b)}$
+  - Log-determinant: $h \cdot w \cdot \sum_i\log|\mathbf{s}_i|$
+
+--
+
+- Invertible 1$\times$1 convolution:
+
+  - Forward: $\mathbf{y} = \mathbf{W} \mathbf{x}$
+  - Backward: $\mathbf{x} = \mathbf{W}^{-1} \mathbf{y}$
+  - Log-determinant: $h \cdot w \cdot \log|\det \mathbf{W}|$
+
+--
+
+- Affine coupling Layer: same as RealNVP
 
 ---
 
-# GLOW
+# GLOW - Samples
+
+.footer[Diederik P. Kingma and Prafulla Dhariwal, "Glow: Generative Flow with Invertible 1$\times$1 Convolutions," _NeurIPS_, 2018]
+
+.center[![glow-samples](images/glow-samples.png)]
 
 ---
 

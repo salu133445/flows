@@ -67,6 +67,15 @@ body {
   max-height: 400px;
 }
 
+.absolute-right {
+  position: absolute;
+  right: 20px;
+}
+
+.absolute-right img {
+  max-width: 600px;
+}
+
 @page {
   size: 1210px 681px;
   margin: 0;
