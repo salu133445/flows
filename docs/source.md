@@ -42,6 +42,35 @@ class: center, middle
 
 .center[![taxonomy](images/gan-vae-flow.png)]
 
+???
+
+Here is a quick summary of the difference between GAN, VAE, and flow-based generative models:
+1. Generative adversarial networks: GAN provides a smart solution to model the data generation, an unsupervised learning problem, as a supervised one. The discriminator model learns to distinguish the real data from the fake samples that are produced by the generator model. Two models are trained as they are playing a [minimax](https://en.wikipedia.org/wiki/Minimax) game.
+2. Variational autoencoders: VAE inexplicitly optimizes the log-likelihood of the data by maximizing the evidence lower bound (ELBO).
+3. Flow-based generative models: A flow-based generative model is constructed by a sequence of invertible transformations. Unlike other two, the model explicitly learns the data distribution `$p(\mathbf{x})$` and therefore the loss function is simply the negative log-likelihood.
+
+---
+
+# GANs vs VAEs vs Flow based models
+
+## Optimization target 
+
+### GAN:
+`$$ \min _{\theta_{g}} \max _{\theta_{d}}\left[\mathbb{E}_{x \sim p_{\text {data}}} \log D_{\theta_{d}}(x)+\mathbb{E}_{z \sim p(z)} \log \left(1-D_{\theta_{d}}\left(G_{\theta_{g}}(z)\right)\right)\right] $$`
+
+### VAE:
+`$$\max _{\theta} \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) \\= \log p_\theta(x) - D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}\left(z \mid x\right)\right)$$`
+
+### Flow-based generative models:
+
+`$$\max _{\theta} \mathbb{E}_{x\sim p_{\text{data}}} \log p_\theta(x)$$`
+
+---
+
+class: center, middle
+
+# How to estimate data likelihood directly?
+
 ---
 
 class: center, middle
@@ -50,7 +79,13 @@ class: center, middle
 
 ---
 
-# Jacobian matrix and determinant
+# Jacobian matrix
+
+Given a function of mapping a $n$-dimensional input vector $\mathbf{x}$ to a $m$-dimensional output vector, $\mathbf{f}: \mathbb{R}^n \mapsto \mathbb{R}^m$, the matrix of all first-order partial derivatives of this function is called the Jacobian matrix $\mathbf{J}$, where one entry on the i-th row and j-th column is $\mathbf{J}_{ij} = \frac{\partial f_i}{\partial x_j}$.
+
+--
+
+`$$ \mathbf{J} = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \dots & \frac{\partial f_1}{\partial x_n} \\ \frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \dots & \frac{\partial f_2}{\partial x_n} \\ \vdots & \vdots & \vdots & \vdots \\ \frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix} $$`
 
 ---
 
@@ -220,6 +255,14 @@ Some dimensions remain unchanged after the transform
 - 3 coupling layers are necessary to allow all dimensions to influence one another
 
 .center[![alternating-pattern](images/alternating-pattern.png)]
+
+---
+
+# NICE - Experiments on MNIST
+
+__Settings__: 764 dimensions (28$\times$28), 6 additive coupling layers
+
+.center[![nice-mnist](images/nice-mnist.png)]
 
 ---
 
