@@ -36,6 +36,107 @@ class: center, middle
 
 ---
 
+# GAN (Generative Adversarial Network)
+
+Define:
+
+Generator `$G$` with parameter `$\theta_g$`, Discriminator `$D$` with parameter `$\theta_d$`.
+
+Data distribution over noise input `$z$`: `$p_z(z)$` (usually uniform distribution)
+
+Data distribution over real sample: `$p_\text{data}(x)$`
+
+--
+
+`$D$` should distinguish between real and fake data:
+`$$\max _{\theta_{d}}\left[\mathbb{E}_{x \sim p_{\text {data}}} \log D(x)+\mathbb{E}_{z \sim p(z)} \log \left(1-D\left(G(z)\right)\right)\right]$$`
+
+--
+`$G$` should be able to fool discriminator:
+`$$\min _{\theta_{g}}\mathbb{E}_{z \sim p(z)} \log \left(1-D\left(G(z)\right)\right)$$`
+
+---
+
+# GAN (Generative Adversarial Network)
+
+Define:
+
+Generator `$G$` with parameter `$\theta_g$`, Discriminator `$D$` with parameter `$\theta_d$`.
+
+Data distribution over noise input `$z$`: `$p_z(z)$` (usually uniform distribution)
+
+Data distribution over real sample: `$p_\text{data}(x)$`
+
+When combining two targets together, `$G$` and `$D$` are playing **minimax game**:
+
+`$$\min _{\theta_{g}}\max _{\theta_{d}}\left[\mathbb{E}_{x \sim p_{\text {data}}} \log D(x)+\mathbb{E}_{z \sim p(z)} \log \left(1-D\left(G(z)\right)\right)\right]$$`
+
+---
+
+# GAN (Generative Adversarial Network)
+
+.footer[AI Gharakhanian, "[Generative Adversarial Networks](https://www.kdnuggets.com/2017/01/generative-adversarial-networks-hot-topic-machine-learning.html)," _blog post_, 2017.]
+
+.center[![gan](images/GAN.png)]
+
+---
+
+# VAE (Variational Autoencoder)
+
+We sample a `$z$` from a prior distribution `$p_\theta(z)$`.
+Then `$x$` is generated from a conditional distribution `$p_\theta(x \mid z)$`.
+The process is
+`$$p_{\theta}\left(\mathbf{x}\right)=\int p_{\theta}\left(\mathbf{x} \mid \mathbf{z}\right) p_{\theta}(\mathbf{z}) d \mathbf{z}$$`
+
+--
+
+However, it is very expensive to check all `$z$` for integral (intractable).
+To narrow down the value space, consider the posterior `$p_\theta(z \mid x)$` and approximate it by `$q_\phi(z\mid x)$`.
+
+--
+
+The data likelihood
+
+`$$\log p_\theta(x) = \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) + D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}\left(z \mid x\right)\right) \\ \geq \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) = ELBO(x; \theta, \phi)$$`
+
+--
+
+`$ELBO(x; \theta, \phi)$` is tractable,
+`$$\max_\theta \log p_\theta(x) \rightarrow \max_{\theta, \phi} ELBO(x; \theta, \phi)$$`.
+
+
+---
+
+# VAE (Variational Autoencoder)
+
+.footer[Lilian Weng, "[From Autoencoder to Beta-VAE](https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html)," _blog post_, 2018.]
+
+.center[![taxonomy](images/vae-gaussian.png)]
+
+---
+
+# GANs vs VAEs vs Flow based models
+
+## Optimization target
+
+--
+
+### GAN:
+`$$ \min _{\theta_{g}} \max _{\theta_{d}}\left[\mathbb{E}_{x \sim p_{\text {data}}} \log D_{\theta_{d}}(x)+\mathbb{E}_{z \sim p(z)} \log \left(1-D_{\theta_{d}}\left(G_{\theta_{g}}(z)\right)\right)\right] $$`
+
+--
+
+### VAE:
+`$$\max _{\theta, \phi} \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) \\= ELBO(x; \theta, \phi)$$`
+
+--
+
+### Flow-based generative models:
+
+`$$\max _{\theta} \mathbb{E}_{x\sim p_{\text{data}}} \log p_\theta(x)$$`
+
+---
+
 # GANs vs VAEs vs Flow based models
 
 .footer[Lilian Weng, "[Flow-based Deep Generative Models](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html)," _blog post_, 2018.]
@@ -48,22 +149,6 @@ Here is a quick summary of the difference between GAN, VAE, and flow-based gener
 1. Generative adversarial networks: GAN provides a smart solution to model the data generation, an unsupervised learning problem, as a supervised one. The discriminator model learns to distinguish the real data from the fake samples that are produced by the generator model. Two models are trained as they are playing a [minimax](https://en.wikipedia.org/wiki/Minimax) game.
 2. Variational autoencoders: VAE inexplicitly optimizes the log-likelihood of the data by maximizing the evidence lower bound (ELBO).
 3. Flow-based generative models: A flow-based generative model is constructed by a sequence of invertible transformations. Unlike other two, the model explicitly learns the data distribution `$p(\mathbf{x})$` and therefore the loss function is simply the negative log-likelihood.
-
----
-
-# GANs vs VAEs vs Flow based models
-
-## Optimization target 
-
-### GAN:
-`$$ \min _{\theta_{g}} \max _{\theta_{d}}\left[\mathbb{E}_{x \sim p_{\text {data}}} \log D_{\theta_{d}}(x)+\mathbb{E}_{z \sim p(z)} \log \left(1-D_{\theta_{d}}\left(G_{\theta_{g}}(z)\right)\right)\right] $$`
-
-### VAE:
-`$$\max _{\theta} \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) \\= \log p_\theta(x) - D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}\left(z \mid x\right)\right)$$`
-
-### Flow-based generative models:
-
-`$$\max _{\theta} \mathbb{E}_{x\sim p_{\text{data}}} \log p_\theta(x)$$`
 
 ---
 
