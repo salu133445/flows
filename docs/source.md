@@ -281,11 +281,11 @@ class: center, middle
 
 The core idea behind NICE (Non-linear Independent Components Estimation) is to
 
-- split $\mathbf{x} \in \mathbb{R}^D$ into two blocks $\mathbf{x}_1 \in \mathbb{R}^d$ and $\mathbf{x}_2 \in \mathbb{R}^{D-d}$
+1. split $\mathbf{x} \in \mathbb{R}^D$ into two blocks $\mathbf{x}_1 \in \mathbb{R}^d$ and $\mathbf{x}_2 \in \mathbb{R}^{D-d}$
 
 --
 
-- apply the following transformation from $(\mathbf{x}_1, \mathbf{x}_2)$ to $(\mathbf{y}_1, \mathbf{y}_2)$
+2. apply the following transformation from $(\mathbf{x}_1, \mathbf{x}_2)$ to $(\mathbf{y}_1, \mathbf{y}_2)$
 
   `$$\begin{cases}
     \mathbf{y}_1 &= \mathbf{x}_1\\
@@ -360,11 +360,11 @@ __Settings__: 764 dimensions (28$\times$28), 6 additive coupling layers
 
 The core idea behind RealNVP (Real-valued Non-Volume Preserving) is to
 
-- split $\mathbf{x} \in \mathbb{R}^D$ into two blocks $\mathbf{x}_1 \in \mathbb{R}^d$ and $\mathbf{x}_2 \in \mathbb{R}^{D-d}$
+1. split $\mathbf{x} \in \mathbb{R}^D$ into two blocks $\mathbf{x}_1 \in \mathbb{R}^d$ and $\mathbf{x}_2 \in \mathbb{R}^{D-d}$
 
 --
 
-- apply the following transformation from $(\mathbf{x}_1, \mathbf{x}_2)$ to $(\mathbf{y}_1, \mathbf{y}_2)$
+2. apply the following transformation from $(\mathbf{x}_1, \mathbf{x}_2)$ to $(\mathbf{y}_1, \mathbf{y}_2)$
 
   `$$\begin{cases}
     \mathbf{y}_{1:d} &= \mathbf{x}_{1:d}\\
