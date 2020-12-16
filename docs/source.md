@@ -292,7 +292,7 @@ The core idea behind NICE (Non-linear Independent Components Estimation) is to
     \mathbf{y}_2 &= \mathbf{x}_2 + m(\mathbf{x}_1)
   \end{cases}$$`
 
-  where $m(\cdot)$ is an arbitrarily function (e.g., deep neural network).
+  where $m(\cdot)$ is an arbitrarily function (e.g., a deep neural network).
 
 ---
 
