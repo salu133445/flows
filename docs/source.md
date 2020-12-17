@@ -352,7 +352,7 @@ Thus, we have `$\log p_i(\mathbf{z}_i) = \log p_{i-1}(\mathbf{z}_{i-1}) - \log \
 
 Now, we obtain `$\log p_i(\mathbf{z}_i) = \log p_{i-1}(\mathbf{z}_{i-1}) - \log \left|\det\frac{df_i}{d\mathbf{z}_{i-1}}\right|$`
 
-Recall that `$\mathbf{x} = \mathbf{z}_K = f_K \circ f_{K-1} \dots f_1 (\mathbf{z_0})$`.
+Recall that `$\mathbf{x} = \mathbf{z}_K = f_K \circ f_{K-1} \circ \dots \circ f_1 (\mathbf{z_0})$`.
 
 Thus, we have
 
@@ -466,7 +466,7 @@ Some dimensions remain unchanged after the transform
 
 # NICE - Experiments on MNIST
 
-__Settings__: 764 dimensions (28$\times$28), 6 additive coupling layers
+__Settings__: 784 dimensions (28$\times$28), 6 additive coupling layers
 
 .center[![nice-mnist](images/nice-mnist.png)]
 
@@ -558,7 +558,7 @@ __Settings__: 2D data, 5 affine coupling layers
 
 # RealNVP - Experiments on MNIST
 
-__Settings__: 764 dimensions (28$\times$28), 5 affine coupling layers
+__Settings__: 784 dimensions (28$\times$28), 5 affine coupling layers
 
 .center[![realnvp-toy](images/realnvp-mnist.png)]
 
