@@ -130,6 +130,14 @@ When combining two targets together, $G$ and $D$ are playing a __minimax game__:
 
 .absolute-right[![gan](images/ae.png)]
 
+???
+
+Autoencoder is a neural network designed to learn an identity function in an unsupervised way to reconstruct the original input while compressing the data in the process so as to discover a more efficient and compressed representation.
+
+- Encoder network: It translates the original high-dimension input into the latent low-dimensional code. The input size is larger than the output size.
+
+- Decoder network: The decoder network recovers the data from the code, likely with larger and larger output layers.
+
 - Autoencoders can reconstruct data, <br /> and can learn features to initialize a <br />supervised model.
 
 --
