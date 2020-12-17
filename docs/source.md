@@ -148,7 +148,7 @@ When combining two targets together, $G$ and $D$ are playing a __minimax game__:
 
 # Variational Autoencoders (VAEs)
 
-.footer[Diederik P Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
+.footer[Diederik P. Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
 
 We sample a $z$ from a prior distribution `$p_\theta(z)$`.
 Then $x$ is generated from a conditional distribution `$p_\theta(x \mid z)$`.
@@ -164,7 +164,7 @@ To narrow down the value space, consider the posterior `$p_\theta(z \mid x)$` an
 
 # Variational Autoencoders (VAEs)
 
-.footer[Diederik P Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
+.footer[Diederik P. Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
 
 `\begin{align}
     &\log p_\theta(x)\\
@@ -191,7 +191,7 @@ To narrow down the value space, consider the posterior `$p_\theta(z \mid x)$` an
 
 # Variational Autoencoders (VAEs)
 
-.footer[Diederik P Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
+.footer[Diederik P. Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
 
 We sample a $z$ from a prior distribution `$p_\theta(z)$`.
 Then $x$ is generated from a conditional distribution `$p_\theta(x \mid z)$`.
@@ -556,7 +556,7 @@ __Settings__: 764 dimensions (28$\times$28), 5 affine coupling layers
 
 ---
 
-# GLOW
+# Glow
 
 .footer[Diederik P. Kingma and Prafulla Dhariwal, "Glow: Generative Flow with Invertible 1$\times$1 Convolutions," _NeurIPS_, 2018]
 
@@ -582,7 +582,7 @@ __Settings__: 764 dimensions (28$\times$28), 5 affine coupling layers
 
 ---
 
-# GLOW - Samples
+# Glow - Samples
 
 .footer[Diederik P. Kingma and Prafulla Dhariwal, "Glow: Generative Flow with Invertible 1$\times$1 Convolutions," _NeurIPS_, 2018]
 
@@ -643,7 +643,7 @@ In MAF, we have `$x_i = z_i \odot \sigma_i(\mathbf{x}_{1:i-1}) + \mu_i(\mathbf{x
 
 `$$z_i = x_i \odot \frac{1}{\sigma_i(\mathbf{x}_{1:i-1})} - \frac{\mu_i(\mathbf{x}_{1:i-1})}{\sigma_i(\mathbf{x}_{1:i-1})}$$`
 
-If we swap $\mathbf{x}$ and $\mathbf{z}$ by letting $\tilde{\mathbf{z}} = \mathbf{x}$ and $\tilde{\mathbf{x}} = \mathbf{z}$, we get the inverse autoregressive flow (IAF)
+Now, if we swap $\mathbf{x}$ and $\mathbf{z}$ (let $\tilde{\mathbf{z}} = \mathbf{x}$ and $\tilde{\mathbf{x}} = \mathbf{z}$), we get the inverse autoregressive flow (IAF)
 
 `$$\begin{align}
   \tilde{x}_i &= \tilde{z}_i \odot \frac{1}{\sigma_i(\tilde{\mathbf{z}}_{1:i-1})} - \frac{\mu_i(\tilde{\mathbf{z}}_{1:i-1})}{\sigma_i(\tilde{\mathbf{z}}_{1:i-1})}\\
@@ -672,8 +672,8 @@ where
 
 |                        | MAF                | IAF                |
 |------------------------|:------------------:|:------------------:|
-| __Base distribtion__   | $\mathbf{z}\sim\pi(\mathbf{z})$ | $\mathbf{x}\sim p(\mathbf{x})$ |
-| __Target distribtion__ | $\tilde{\mathbf{z}}\sim\tilde{\pi}(\tilde{\mathbf{z}})$ | $\tilde{\mathbf{x}}\sim \tilde{p}(\tilde{\mathbf{x}})$ |
+| __Base distribution__   | $\mathbf{z}\sim\pi(\mathbf{z})$ | $\mathbf{x}\sim p(\mathbf{x})$ |
+| __Target distribution__ | $\tilde{\mathbf{z}}\sim\tilde{\pi}(\tilde{\mathbf{z}})$ | $\tilde{\mathbf{x}}\sim \tilde{p}(\tilde{\mathbf{x}})$ |
 | __Model__              | `$\small x_i = z_i \odot \sigma_i(\mathbf{x}_{1:i-1}) + \mu_i(\mathbf{x}_{1:i-1})$` | `$\small \tilde{x}_i = \tilde{z}_i \odot \tilde{\sigma}_i(\tilde{\mathbf{z}}_{1:i-1}) + \tilde{\mu}_i(\tilde{\mathbf{z}}_{1:i-1})$` |
 | __Sampling__           | slow (sequential)  | fast (single pass) |
 | __Density estimation__ | fast (single pass) | slow (sequential)  |
