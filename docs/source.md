@@ -119,6 +119,31 @@ When combining two targets together, $G$ and $D$ are playing a __minimax game__:
 
 # Variational Autoencoders (VAEs)
 
+--
+## Some background: Autoencoders
+
+.footer[CS221n, "[Generative Models](http://cs231n.stanford.edu/slides/2020/lecture_11.pdf)," _lecture 11_, 2020.]
+
+.absolute-right[![gan](images/ae.png)]
+
+- Autoencoders can reconstruct data, <br /> and can learn features to initialize a <br />supervised model.
+
+--
+
+- Features capture factors of variation in <br /> training data.
+
+--
+
+- But we can’t generate new images from <br /> an autoencoder because we don’t know <br /> the space of `$z$`.
+
+--
+
+- How do we make autoencoder a <br /> generative model?
+
+---
+
+# Variational Autoencoders (VAEs)
+
 We sample a $z$ from a prior distribution `$p_\theta(z)$`.
 Then $x$ is generated from a conditional distribution `$p_\theta(x \mid z)$`.
 The process is
