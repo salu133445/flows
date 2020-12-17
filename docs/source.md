@@ -49,6 +49,8 @@ In the following sections, Generative Adversarial Network (GAN), Variational Aut
 
 # Generative Adversarial Networks (GANs)
 
+.footer[Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio, "Generative Adversarial Nets," _NeurIPS_, 2014.]
+
 ???
 
 Generative adversarial network (GAN) has shown great results in many generative tasks to replicate the real-world rich content such as images, human language, and music.
@@ -73,6 +75,8 @@ These two models compete against each other during the training process: the gen
 
 # Generative Adversarial Networks (GANs)
 
+.footer[Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio, "Generative Adversarial Nets," _NeurIPS_, 2014.]
+
 Define:
 
 Generator $G$ with parameter `$\theta_g$`, Discriminator $D$ with parameter `$\theta_d$`.
@@ -94,6 +98,8 @@ $G$ should be able to fool discriminator:
 ---
 
 # Generative Adversarial Networks (GANs)
+
+.footer[Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio, "Generative Adversarial Nets," _NeurIPS_, 2014.]
 
 Define:
 
@@ -119,10 +125,9 @@ When combining two targets together, $G$ and $D$ are playing a __minimax game__:
 
 # Variational Autoencoders (VAEs)
 
---
 ## Some background: Autoencoders
 
-.footer[CS221n, "[Generative Models](http://cs231n.stanford.edu/slides/2020/lecture_11.pdf)," _lecture 11_, 2020.]
+.footer[Fei-Fei Li, Ranjay Krishna, and Danfei Xu, "[Lecture 11: Generative Models](http://cs231n.stanford.edu/slides/2020/lecture_11.pdf)," _lecture note_, Stanford CS231n, 2020.]
 
 .absolute-right[![gan](images/ae.png)]
 
@@ -144,6 +149,8 @@ When combining two targets together, $G$ and $D$ are playing a __minimax game__:
 
 # Variational Autoencoders (VAEs)
 
+.footer[Diederik P Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
+
 We sample a $z$ from a prior distribution `$p_\theta(z)$`.
 Then $x$ is generated from a conditional distribution `$p_\theta(x \mid z)$`.
 The process is
@@ -157,6 +164,8 @@ To narrow down the value space, consider the posterior `$p_\theta(z \mid x)$` an
 ---
 
 # Variational Autoencoders (VAEs)
+
+.footer[Diederik P Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
 
 `\begin{align}
     &\log p_\theta(x)\\
@@ -183,6 +192,8 @@ To narrow down the value space, consider the posterior `$p_\theta(z \mid x)$` an
 
 # Variational Autoencoders (VAEs)
 
+.footer[Diederik P Kingma and Max Welling, "Auto-Encoding Variational Bayes," _ICLR_, 2014.]
+
 We sample a $z$ from a prior distribution `$p_\theta(z)$`.
 Then $x$ is generated from a conditional distribution `$p_\theta(x \mid z)$`.
 The process is
@@ -195,12 +206,11 @@ To narrow down the value space, consider the posterior `$p_\theta(z \mid x)$` an
 
 The data likelihood
 
-`$$\log p_\theta(x) = \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) + D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}\left(z \mid x\right)\right) \\ \geq \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) = \text{ELBO}(x; \theta, \phi)$$`
+`$$\small \log p_\theta(x) = \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) + D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}\left(z \mid x\right)\right) \\ \geq \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) = \text{ELBO}(x; \theta, \phi)$$`
 
 --
 
-`$\text{ELBO}(x; \theta, \phi)$` is tractable,
-`$$\max_\theta \log p_\theta(x) \rightarrow \max_{\theta, \phi} \text{ELBO}(x; \theta, \phi)$$`.
+`$\text{ELBO}(x; \theta, \phi)$` is tractable, `$\displaystyle \max_\theta \log p_\theta(x) \rightarrow \max_{\theta, \phi} \text{ELBO}(x; \theta, \phi)$`.
 
 ---
 
@@ -266,11 +276,11 @@ class: center, middle
 
 # Jacobian matrix
 
-Given a function of mapping a $n$-dimensional input vector $\mathbf{x}$ to a $m$-dimensional output vector, $\mathbf{f}: \mathbb{R}^n \mapsto \mathbb{R}^m$, the matrix of all first-order partial derivatives of this function is called the Jacobian matrix $\mathbf{J}$, where one entry on the i-th row and j-th column is $\mathbf{J}_{ij} = \frac{\partial f_i}{\partial x_j}$.
+Given a function $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$ that takes as input a $n$-dimensional input vector $\mathbf{x}$ and output a $m$-dimensional vector, the Jacobian matrix of $\mathbf{f}$ is defined as
 
---
+`$$ \mathbf{J} = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \dots & \frac{\partial f_1}{\partial x_n} \\ \frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \dots & \frac{\partial f_2}{\partial x_n} \\ \vdots & \vdots & \vdots & \vdots \\ \frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}$$`
 
-`$$ \mathbf{J} = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \dots & \frac{\partial f_1}{\partial x_n} \\ \frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \dots & \frac{\partial f_2}{\partial x_n} \\ \vdots & \vdots & \vdots & \vdots \\ \frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix} $$`
+which is the matrix of all first-order partial derivatives. The entry on the $i$-th row and $j$-th column is $$\mathbf{J}_{ij} = \frac{\partial f_i}{\partial x_j}$$
 
 ---
 
@@ -292,11 +302,11 @@ where $\det\frac{dg}{d\mathbf{x}}$ is the _Jacobian determinant_ of $g$.
 
 class: center, middle
 
-# Normalizing Flow Models
+# Normalizing Flows
 
 ---
 
-# Normalizing flow models
+# Normalizing flows
 
 .footer[Lilian Weng, "[Flow-based Deep Generative Models](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html)," _blog post_, 2018.]
 
@@ -311,7 +321,9 @@ __Key__: Transform a simple distribution into a complex one by applying a sequen
 
 ---
 
-# Normalizing flow models
+# Normalizing flows
+
+.footer[Danilo Jimenez Rezende and Shakir Mohamed, "Variational Inference with Normalizing Flows," _ICML_, 2015.]
 
 For each step, we have `$\mathbf{z}_i \sim p_i(\mathbf{z}_i)$`, `$\mathbf{z}_i = f_i(\mathbf{z}_{i-1})$` and `$\mathbf{z}_{i-1} = g_i(\mathbf{z}_i)$`. Now,
 
@@ -327,7 +339,9 @@ Thus, we have `$\log p_i(\mathbf{z}_i) = \log p_{i-1}(\mathbf{z}_{i-1}) - \log \
 
 ---
 
-# Normalizing flow models
+# Normalizing flows
+
+.footer[Danilo Jimenez Rezende and Shakir Mohamed, "Variational Inference with Normalizing Flows," _ICML_, 2015.]
 
 Now, we obtain `$\log p_i(\mathbf{z}_i) = \log p_{i-1}(\mathbf{z}_{i-1}) - \log \left|\det\frac{df_i}{d\mathbf{z}_{i-1}}\right|$`
 
@@ -345,7 +359,9 @@ Thus, we have
 
 ---
 
-# Normalizing flow models
+# Normalizing flows
+
+.footer[Danilo Jimenez Rezende and Shakir Mohamed, "Variational Inference with Normalizing Flows," _ICML_, 2015.]
 
 In normalizing flows, the exact log-likelihood $\log p(\mathbf{x})$ of input data $x$ is
 
@@ -368,7 +384,7 @@ $$LL(\mathcal{D}) = \sum_{\mathbf{x}\in\mathcal{D}} \log p(\mathbf{x})$$
 
 class: center, middle
 
-# Models
+# Normalizing Flow Models
 
 ---
 
@@ -430,9 +446,13 @@ The transformation
 
   `$$\det(\mathbf{J}) = \mathbf{I}$$`
 
+  Note that NICE is a type of _volume-preserving flows_ as it has a unit Jacobian determinant.
+
 ---
 
 # NICE - Alternating pattern
+
+.footer[Laurent Dinh, David Krueger, and Yoshua Bengio, "NICE: Non-linear Independent Components Estimation," _ICLR_, 2015.<br>Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio, "Density Estimation using Real NVP," _ICLR_, 2017.]
 
 Some dimensions remain unchanged after the transform
 
@@ -579,6 +599,102 @@ __Settings__: 764 dimensions (28$\times$28), 5 affine coupling layers
 
 class: center, middle
 
+# Autoregressive Flows
+
+---
+
+# Autoregressive flows
+
+.footer[Lilian Weng, "[Flow-based Deep Generative Models](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html)," _blog post_, 2018.]
+
+__Key__: Model the transformation in a normalizing flow as an _autoregressive model_.
+
+In an autoregressive model, we assume that _the current output depends only on the data observed in the past_ and factorize the joint probability `$p(x_1, x_2, \dots, x_D)$` into the product of the probability of observing `$x_i$` conditioned on the past observations `$x_1, x_2, \dots, x_{i-1}$`.
+
+`$$\begin{align}
+  p(\mathbf{x}) &= p(x_1, x_2, \dots, x_D)\\
+  &= p(x_1)\,p(x_2|x_1)\,p(x_3|x_1, x_2)\,\dots\,p(x_D|x_1, x_2, \dots, x_{D-1})\\
+  &= \prod_{i=1}^D p(x_i|x_1, x_2, \dots, x_{i-1})\\
+  &= \prod_{i=1}^D p(x_i|\mathbf{x}_{1:i-1})
+\end{align}$$`
+
+---
+
+class: center, middle
+
+# Autoregressive Flow Models
+
+---
+
+# Masked autoregressive flow (MAF)
+
+.footer[George Papamakarios, Theo Pavlakou, and Iain Murray, "Masked Autoregressive Flow for Density Estimation," _NeurIPS_, 2017.<br>Mathieu Germain, Karol Gregor, Iain Murray, and Hugo Larochelle, "MADE: Masked Autoencoder for Distribution Estimation," _ICML_, 2015.]
+
+Given two random variables $\mathbf{z} \sim \pi(\mathbf{z})$ and $\mathbf{x} \sim p(\mathbf{x})$ where $\pi(\mathbf{z})$ is known but $p(\mathbf{x})$ is unknown. Masked autoregressive flow (MAF) aims to learn $p(x)$.
+
+- Sampling:
+
+  `$$x_i \sim p(x_i|\mathbf{x}_{1:i-1}) = z_i \odot \sigma_i(\mathbf{x}_{1:i-1}) + \mu_i(\mathbf{x}_{1:i-1})$$`
+
+  Note that this computation is slow as it is sequential and autoregressive.
+
+--
+
+- Density estimation:
+
+  `$$p(\mathbf{x}) = \prod_{i=1}^D p(x_i|\mathbf{x}_{1:i-1})$$`
+
+  Note that this computation can be fast if we use the _masking_ approach introduced in MADE as it only requires one single pass to the network.
+
+---
+
+# Inverse autoregressive flow (IAF)
+
+.footer[Diederik P. Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling, "Improved Variational Inference with Inverse Autoregressive Flow," _NeurIPS_, 2016.]
+
+In MAF, we have `$x_i = z_i \odot \sigma_i(\mathbf{x}_{1:i-1}) + \mu_i(\mathbf{x}_{1:i-1})$`. We can reverse it into
+
+`$$z_i = x_i \odot \frac{1}{\sigma_i(\mathbf{x}_{1:i-1})} - \frac{\mu_i(\mathbf{x}_{1:i-1})}{\sigma_i(\mathbf{x}_{1:i-1})}$$`
+
+If we swap $\mathbf{x}$ and $\mathbf{z}$ by letting $\tilde{\mathbf{z}} = \mathbf{x}$ and $\tilde{\mathbf{x}} = \mathbf{z}$, we get the inverse autoregressive flow (IAF)
+
+`$$\begin{align}
+  \tilde{x}_i &= \tilde{z}_i \odot \frac{1}{\sigma_i(\tilde{\mathbf{z}}_{1:i-1})} - \frac{\mu_i(\tilde{\mathbf{z}}_{1:i-1})}{\sigma_i(\tilde{\mathbf{z}}_{1:i-1})}\\
+  &= \tilde{z}_i \odot \tilde{\sigma}_i(\tilde{\mathbf{z}}_{1:i-1}) + \tilde{\mu}_i(\tilde{\mathbf{z}}_{1:i-1})
+\end{align}$$`
+
+where
+
+`$$\tilde{\sigma}_i(\tilde{\mathbf{z}}_{1:i-1}) = \frac{1}{\sigma_i(\tilde{\mathbf{z}}_{1:i-1})}, \quad \tilde{\mu}_i(\tilde{\mathbf{z}}_{1:i-1}) = -\frac{\mu_i(\tilde{\mathbf{z}}_{1:i-1})}{\sigma_i(\tilde{\mathbf{z}}_{1:i-1})}$$`
+
+---
+
+# MAF vs IAF
+
+.footer[Lilian Weng, "[Flow-based Deep Generative Models](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html)," _blog post_, 2018.]
+
+.center[![maf-iaf](images/maf-iaf.png)]
+
+.center[(Note that $\tilde{\mathbf{z}} = \mathbf{x}$, $\tilde{\mathbf{x}} = \mathbf{z}$, $\tilde{\pi} = p$ and $\tilde{p} = \pi$.)]
+
+---
+
+# MAF vs IAF
+
+.footer[Lilian Weng, "[Flow-based Deep Generative Models](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html)," _blog post_, 2018.]
+
+|                        | MAF                | IAF                |
+|------------------------|:------------------:|:------------------:|
+| __Base distribtion__   | $\mathbf{z}\sim\pi(\mathbf{z})$ | $\mathbf{x}\sim p(\mathbf{x})$ |
+| __Target distribtion__ | $\tilde{\mathbf{z}}\sim\tilde{\pi}(\tilde{\mathbf{z}})$ | $\tilde{\mathbf{x}}\sim \tilde{p}(\tilde{\mathbf{x}})$ |
+| __Model__              | `$\small x_i = z_i \odot \sigma_i(\mathbf{x}_{1:i-1}) + \mu_i(\mathbf{x}_{1:i-1})$` | `$\small \tilde{x}_i = \tilde{z}_i \odot \tilde{\sigma}_i(\tilde{\mathbf{z}}_{1:i-1}) + \tilde{\mu}_i(\tilde{\mathbf{z}}_{1:i-1})$` |
+| __Sampling__           | slow (sequential)  | fast (single pass) |
+| __Density estimation__ | fast (single pass) | slow (sequential)  |
+
+---
+
+class: center, middle
+
 # Summary
 
 ---
@@ -588,7 +704,7 @@ class: center, middle
 - Compare different generative models
   - GANs, VAEs and flow-based models
 - Survey different normalizing flow models
-  - NICE, RealNVP and Glow
+  - NICE, RealNVP, Glow, MAF and IAF
 - Conduct experiments on generating MNIST handwritten digits
   - NICE and RealNVP
 

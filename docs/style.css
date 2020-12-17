@@ -17,12 +17,17 @@ body {
   margin: 1ex 0;
 }
 
+.remark-slide-content th, td {
+  padding: 10px;
+}
+
 .remark-slide-content .footer {
   color: #999;
   font-size: 16px;
   position: fixed;
 	bottom: 30px;
-	height: 2em;
+  height: 2em;
+  max-width: 1050px;
 }
 
 .remark-slide-content .footer a {
