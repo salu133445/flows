@@ -34,6 +34,41 @@ class: center, middle
 
 .center[![taxonomy](images/taxonomy.png)]
 
+???
+On the left branch of this taxonomic tree, an explicit likelihood can be maximized by constructing an explicit density (e.g. VAE).
+
+However, the density may be computationally be intractable in many cases.
+
+On the right branch of the tree, the model does not explicitly represent a probability distribution over the space where the data lies (e.g. GAN).
+
+Instead, the model provides some way of interacting less directly with data distribution.
+
+In the following sections, Generative Adversarial Network (GAN), Variational Autoencoder (VAE) are briefly introduced and Flow based models are elaborated with more details.
+
+---
+
+# Generative Adversarial Networks (GANs)
+
+???
+
+Generative adversarial network (GAN) has shown great results in many generative tasks to replicate the real-world rich content such as images, human language, and music.
+
+It is inspired by game theory: two models, a generator and a critic, are competing with each other while making each other stronger at the same time.
+
+--
+
+Components:
+
+- A discriminator $D$ estimates the probability of a given sample coming from the real dataset.
+- A generator $G$ outputs synthetic samples given a noise variable input.
+
+???
+
+- A discriminator $D$ estimates the probability of a given sample coming from the real dataset. It works as a critic and is optimized to tell the fake samples from the real ones.
+- A generator $G$ outputs synthetic samples given a noise variable input. It is trained to capture the real data distribution so that its generative samples can be as real as possible, or in other words, can trick the discriminator to offer a high probability.
+
+These two models compete against each other during the training process: the generator $G$ is trying hard to trick the discriminator, while the critic model $D$ is trying hard not to be cheated.
+
 ---
 
 # Generative Adversarial Networks (GANs)
@@ -90,6 +125,43 @@ The process is
 `$$p_{\theta}\left(\mathbf{x}\right)=\int p_{\theta}\left(\mathbf{x} \mid \mathbf{z}\right) p_{\theta}(\mathbf{z}) d \mathbf{z}$$`
 
 --
+
+However, it is very expensive to check all $z$ for integral (intractable).
+To narrow down the value space, consider the posterior `$p_\theta(z \mid x)$` and approximate it by `$q_\phi(z\mid x)$`.
+
+---
+
+# Variational Autoencoders (VAEs)
+
+`\begin{align}
+    &\log p_\theta(x)\\
+    &=  \mathbf{E}_{z \sim q_{\phi}\left(z \mid x\right)}\left[\log p_{\theta}\left(x\right)\right] \\
+    &=  \mathbf{E}_{z \sim q_{\phi}\left(z \mid x\right)}\left[\log \frac{p_{\theta}\left(x \mid z\right) p_{\theta}(z)}{p_{\theta}\left(z \mid x\right)}\right] \\
+    &=  \mathbf{E}_{z \sim q_{\phi}\left(z \mid x\right)}\left[\log \frac{p_{\theta}\left(x \mid z\right) p_{\theta}(z)}{p_{\theta}\left(z \mid x\right)} \frac{q_{\phi}\left(z \mid x\right)}{q_{\phi}\left(z \mid x\right)}\right] \\
+    &=  \mathbf{E}_{z \sim q_{\phi}\left(z \mid x\right)}\left[\log p_{\theta}\left(x \mid z\right)\right]-\mathbf{E}_{z \sim q_{\phi}\left(z \mid x\right)}\left[\log \frac{q_{\phi}\left(z \mid x\right)}{p_{\theta}(z)}\right]+\mathbf{E}_{z \sim q_{\phi}\left(z \mid x\right)}\left[\log \frac{q_{\phi}\left(z \mid x\right)}{p_{\theta}\left(z \mid x\right)}\right] \\
+    &= \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right) + D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}\left(z \mid x\right)\right)\\
+    &\geq \mathbb{E}_{z \sim q_\phi(z \mid x)}\left[\log p_{\theta}\left(x \mid z\right)\right]-D_{K L}\left(q_{\phi}\left(z \mid x\right) \| p_{\theta}(z)\right)\\
+    &= \text{ELBO}(x; \theta, \phi)
+\end{align}`
+
+???
+
+- Bayes's Rule
+- Multiply by constant
+- Logarithm
+
+1. Decoder network gives `$p_\theta(x \mid z)$`, can compute estimate of this term through sampling (need some trick to differentiate through sampling).
+2. This KL term (between Gaussians for encoder and $z$ prior) has nice closed-form solution!
+3. `$p_\theta(z \mid x)` intractable (saw earlier), can’t compute this KL term :( But we know KL divergence always >= 0.
+
+---
+
+# Variational Autoencoders (VAEs)
+
+We sample a $z$ from a prior distribution `$p_\theta(z)$`.
+Then $x$ is generated from a conditional distribution `$p_\theta(x \mid z)$`.
+The process is
+`$$p_{\theta}\left(\mathbf{x}\right)=\int p_{\theta}\left(\mathbf{x} \mid \mathbf{z}\right) p_{\theta}(\mathbf{z}) d \mathbf{z}$$`
 
 However, it is very expensive to check all $z$ for integral (intractable).
 To narrow down the value space, consider the posterior `$p_\theta(z \mid x)$` and approximate it by `$q_\phi(z\mid x)$`.
