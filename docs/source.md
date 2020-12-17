@@ -15,10 +15,9 @@ Jiarui Xu and Hao-Wen Dong
   - Jacobian matrix and determinant
   - Change of variable theorem
 - __Normalizing Flows__
-- __Models__
-  - NICE
-  - RealNVP
-  - Glow
+  - NICE, RealNVP and Glow
+- __Autoregressive Flows__
+  - MAF and IAF
 
 ---
 
@@ -382,12 +381,6 @@ $$LL(\mathcal{D}) = \sum_{\mathbf{x}\in\mathcal{D}} \log p(\mathbf{x})$$
 
 ---
 
-class: center, middle
-
-# Normalizing Flow Models
-
----
-
 # NICE
 
 .footer[Laurent Dinh, David Krueger, and Yoshua Bengio, "NICE: Non-linear Independent Components Estimation," _ICLR_, 2015.]
@@ -617,12 +610,6 @@ In an autoregressive model, we assume that _the current output depends only on t
   &= \prod_{i=1}^D p(x_i|x_1, x_2, \dots, x_{i-1})\\
   &= \prod_{i=1}^D p(x_i|\mathbf{x}_{1:i-1})
 \end{align}$$`
-
----
-
-class: center, middle
-
-# Autoregressive Flow Models
 
 ---
 
