@@ -15,4 +15,4 @@ RealNVP to examine the effectiveness of flow-based models.
 ## Notebooks
 
 - RealNVP on toy dataset: `realnvp_toy.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/salu133445/flows/blob/main/realnvp_toy.ipynb)
-- RealNVP on MSNIT: `realnvp_mnist.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/salu133445/flows/blob/main/realnvp_mnist.ipynb)
+- RealNVP on MNIST: `realnvp_mnist.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/salu133445/flows/blob/main/realnvp_mnist.ipynb)
